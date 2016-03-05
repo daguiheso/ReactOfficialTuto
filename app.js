@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require ('react-dom');
+var marked = require('marked');
 
 var CommentBox = React.createClass({
 	render : function () {
@@ -35,13 +36,17 @@ var CommentForm = React.createClass({
 });
 
 var Comment = React.createClass({
-	render: function() {
+	rawMarkup : function () {
+		var rawMarkup = marked(this.props.children.toString(), {sanitaze : true});
+		return { __html : rawMarkup };
+	},
+	render : function() {
 		return (
 			<div className="comment">
 				<h2 className="commentAuthor">
 					{this.props.author}
 				</h2>
-				{this.props.children}
+				<span dangerouslySetInnerHTML={this.rawMarkup()}/>
 			</div>
 		);
 	}
