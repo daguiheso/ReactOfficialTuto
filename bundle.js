@@ -95,6 +95,7 @@ process.umask = function() { return 0; };
 var React = require('react');
 var ReactDOM = require('react-dom');
 var marked = require('marked');
+var data = [{ id: 1, author: "Daniel Hernandez", text: "This is one comment" }, { id: 2, author: "Jordan Walke", text: "This is *another* comment" }];
 
 var CommentBox = React.createClass({
 	displayName: 'CommentBox',
@@ -108,7 +109,7 @@ var CommentBox = React.createClass({
 				null,
 				'Comments'
 			),
-			React.createElement(CommentList, null),
+			React.createElement(CommentList, { data: this.props.data }),
 			React.createElement(CommentForm, null)
 		);
 	}
@@ -118,19 +119,18 @@ var CommentList = React.createClass({
 	displayName: 'CommentList',
 
 	render: function () {
+		// mapeo de todos los comentarios
+		var commentNodes = this.props.data.map(function (comment) {
+			return React.createElement(
+				Comment,
+				{ author: comment.author, key: comment.id },
+				comment.text
+			);
+		});
 		return React.createElement(
 			'div',
 			{ className: 'commentList' },
-			React.createElement(
-				Comment,
-				{ author: 'Pete Hunt' },
-				'This is one comment'
-			),
-			React.createElement(
-				Comment,
-				{ author: 'Jordan Walke' },
-				'This  is *another* comment'
-			)
+			commentNodes
 		);
 	}
 });
@@ -168,7 +168,7 @@ var Comment = React.createClass({
 	}
 });
 
-ReactDOM.render(React.createElement(CommentBox, null), document.getElementById('content'));
+ReactDOM.render(React.createElement(CommentBox, { data: data }), document.getElementById('content'));
 
 },{"marked":3,"react":160,"react-dom":4}],3:[function(require,module,exports){
 (function (global){
