@@ -95,20 +95,19 @@ process.umask = function() { return 0; };
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-ReactDOM.render(React.createElement(
-     'div',
-     null,
-     React.createElement(
-          'h1',
-          null,
-          'Hola Mundo'
-     ),
-     React.createElement(
-          'h1',
-          null,
-          'buen dia !!!!'
-     )
-), document.getElementById('container'));
+var CommentBox = React.createClass({
+	displayName: 'CommentBox',
+
+	render: function () {
+		return React.createElement(
+			'div',
+			{ className: 'commentBox' },
+			'Hello, world! I am a CommentBox.'
+		);
+	}
+});
+
+ReactDOM.render(React.createElement(CommentBox, null), document.getElementById('content'));
 
 },{"react":159,"react-dom":3}],3:[function(require,module,exports){
 'use strict';
