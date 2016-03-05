@@ -120,7 +120,16 @@ var CommentList = React.createClass({
 		return React.createElement(
 			'div',
 			{ className: 'commentList' },
-			'Hello, world! I am a CommentList.'
+			React.createElement(
+				Comment,
+				{ author: 'Pete Hunt' },
+				'This is one comment'
+			),
+			React.createElement(
+				Comment,
+				{ author: 'Jordan Walke' },
+				'This  is *another* comment'
+			)
 		);
 	}
 });
@@ -139,7 +148,6 @@ var CommentForm = React.createClass({
 
 var Comment = React.createClass({
 	displayName: 'Comment',
-
 
 	render: function () {
 		return React.createElement(
