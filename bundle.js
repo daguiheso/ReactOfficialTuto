@@ -95,11 +95,14 @@ process.umask = function() { return 0; };
 var React = require('react');
 var ReactDOM = require('react-dom');
 var marked = require('marked');
-var data = [{ id: 1, author: "Daniel Hernandez", text: "This is one comment" }, { id: 2, author: "Jordan Walke", text: "This is *another* comment" }];
+var datas = [{ id: 1, author: "Daniel Hernandez", text: "This is one comment" }, { id: 2, author: "Jordan Walke", text: "This is *another* comment" }];
 
 var CommentBox = React.createClass({
 	displayName: 'CommentBox',
 
+	getInitialState() {
+		return { data: datas };
+	},
 	render: function () {
 		return React.createElement(
 			'div',
@@ -109,7 +112,7 @@ var CommentBox = React.createClass({
 				null,
 				'Comments'
 			),
-			React.createElement(CommentList, { data: this.props.data }),
+			React.createElement(CommentList, { data: this.state.data }),
 			React.createElement(CommentForm, null)
 		);
 	}
@@ -168,7 +171,7 @@ var Comment = React.createClass({
 	}
 });
 
-ReactDOM.render(React.createElement(CommentBox, { data: data }), document.getElementById('content'));
+ReactDOM.render(React.createElement(CommentBox, null), document.getElementById('content'));
 
 },{"marked":3,"react":160,"react-dom":4}],3:[function(require,module,exports){
 (function (global){

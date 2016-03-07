@@ -1,17 +1,20 @@
 var React = require('react');
 var ReactDOM = require ('react-dom');
 var marked = require('marked');
-var data = [
+var datas = [
   {id: 1, author: "Daniel Hernandez", text: "This is one comment"},
   {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
 ];
 
 var CommentBox = React.createClass({
+	getInitialState() {
+		return {data : datas};
+	},
 	render : function () {
 		return (
 			<div className='commentBox'>
 				<h1>Comments</h1>
-				<CommentList data={this.props.data}/>
+				<CommentList data={this.state.data}/>
 				<CommentForm/>
 			</div>
 		);
@@ -66,6 +69,6 @@ var Comment = React.createClass({
 });
 
 ReactDOM.render(
-	<CommentBox data={data} />,
+	<CommentBox/>,
 	document.getElementById('content')
 ); 
